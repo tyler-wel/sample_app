@@ -3,8 +3,13 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   
   def setup
-    @user = User.new(name: "TestGuy", email: "test@gmail.com")
+    @user = User.new(name: "TestGuy", email: "test@gmail.com",
+                      password: "foobar", password_confirmation: "foobar")
   end
+
+# The assert_not's work in here through the fact we're doing validation in the model file
+# Because of the validation in /app/mode/user.rb, the changes made, such as @user.name = "", 
+#   are actually invalid changes, therefor they don't happen, meaning the test should pass
 
   test "should be valid" do
     assert @user.valid?
@@ -27,7 +32,10 @@ class UserTest < ActiveSupport::TestCase
 
   test "email shouldn't be too long" do
     @user.email = "a" * 244 + "@example.com"
-    assert_not @user.valid?
+    assert_not @user.valid? 
+    #app/model/user.rb validation requires max length of 255, so user.email = a*244
+    # FAILS the @user.valid? check, therefor
+    # assert_not FALSE = TEST_PASS
   end
 
   test "email validation should accept valid emails" do
@@ -52,5 +60,16 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     assert_not dup_user.valid?
   end
+
+  test "password should be present (nonblank)" do
+    @user.password = @user.password_confirmation = " " * 6
+    assert_not @user.valid?
+  end
+
+  test "password should have a minimum length" do
+    @user.password = @user.password_confirmation = "a" * 5
+    assert_not @user.valid?
+  end
+
 
 end
