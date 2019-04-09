@@ -13,28 +13,30 @@ is available jointly under the MIT License and the Beerware License. See
 
 ## Getting started
 
-To get started with the app, clone the repo and then install the needed gems:
+# Note: The following app is being run on docker
+
+To get started with the app, clone the repo and then install the needed gems with docker:
 
 ```
-$ bundle install --without production
+$ docker-compose build
 ```
 
 Next, migrate the database:
 
 ```
-$ rails db:migrate
+$ docker-compose run web rails db:migrate
 ```
 
 Finally, run the test suite to verify that everything is working correctly:
 
 ```
-$ rails test
+$ docker-compose run web rails test
 ```
 
 If the test suite passes, you'll be ready to run the app in a local server:
 
 ```
-$ rails server
+$ docker-compose up
 ```
 
 For more information, see the
