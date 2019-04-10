@@ -1,0 +1,9 @@
+<%= link_to board do%>
+  <li id="board-<%= board.id %>">
+    <span class="board"><%= board.name %></span>
+    <span class="description"><%= board.description %></span>
+    <span class="timestamp">
+      Created at <%= board.created_at %>.
+    </span>
+  </li>
+<% end %>

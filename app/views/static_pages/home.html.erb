@@ -4,13 +4,13 @@
       <section class="user_info">
         <%= render 'shared/user_info' %>
       </section>
-      <section class="micropost_form">
-        <%= render 'shared/micropost_form' %>
+      <section>
+        <p>Useful user info here</p>
       </section>
     </aside>
     <div class="col-md-8">
-      <h3>Micropost Feed</h3>
-      <%= render 'shared/feed' %>
+      <h3>User Boards</h3>
+        <%= render 'shared/board_list' %> 
     </div>
   </div>
 <% else %>
