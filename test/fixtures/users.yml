@@ -3,6 +3,7 @@ tester:
   name: Tester
   email: email@gmail.com
   password_digest: <%= User.digest('foobar') %>
+  admin: true
 
 tester_boi:
   name: Boi
