@@ -17,6 +17,12 @@ class BoardsController < ApplicationController
     @lists = @board.task_lists
   end
   
+  def destroy 
+    Board.find(params[:id]).destroy
+    flash[:success] = "Board Deleted"
+    redirect_to root_path
+   end
+
 
   private
 
