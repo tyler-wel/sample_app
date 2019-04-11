@@ -11,9 +11,11 @@ test_user = User.create(name: "Tester",
   password_confirmation: "foobar",
   admin: true)
 
-test_user.boards.create( { name: "board1", description: "a description" } )
+work_board = test_user.boards.create( { name: "Work Board", description: "All tasks related to work" } )
+personal_board = test_user.boards.create( { name: "Person Board", description: "All my personal tasks."})
 
-User.create(name: "Boi",
+
+boi_user = User.create(name: "Boi",
   email: "email2@gmail.com",
   password: "foobar",
   password_confirmation: "foobar")
@@ -22,21 +24,14 @@ User.create!(name:  "Example User",
   email: "example@railstutorial.org",
   password:              "foobar",
   password_confirmation: "foobar")
+  
+work_board.users << boi_user
 
 
 
 users = User.order(:created_at).take(6)
-25.times do
+10.times do
   content = Faker::Lorem.sentence(5)
   users.each { |user| user.microposts.create(content: content)}
 end
 
-50.times do |n|
-name  = Faker::Name.name
-email = "example-#{n+1}@railstutorial.org"
-password = "password"
-User.create!(name:  name,
-    email: email,
-    password:              password,
-    password_confirmation: password)
-end

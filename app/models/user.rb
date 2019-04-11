@@ -6,13 +6,15 @@ class User < ApplicationRecord
   }
 
   has_many  :microposts, dependent: :destroy
-  has_and_belongs_to_many :boards
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 }, 
               format: { with: VALID_EMAIL_REGEX},
               uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   has_secure_password
+
+  has_and_belongs_to_many :boards, -> { distinct }
+
 
   # Returns the hash digest of the given string.
   def User.digest(string)
@@ -24,5 +26,10 @@ class User < ApplicationRecord
   def feed 
     Micropost.where("user_id = ?", id)
   end
+
+  def owned_boards 
+    Board.where("user_id = ?", id)
+  end
+
 
 end

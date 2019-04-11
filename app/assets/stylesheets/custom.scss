@@ -179,6 +179,36 @@ input {
   }
 }
 
+a:hover{
+  text-decoration: none;
+}
+
+/* boards */
+.boards {
+  list-style: none;
+  padding: 0px;
+
+  li {
+    padding: 10px;
+    border: 1px solid #e8e8e8;
+  }
+  .board_block{
+    .board {
+      font-size: 1.4em;
+      color: #000;
+    }
+    .description {
+      display: block;
+      color: $gray;
+    }
+    .timestamp {
+      color: $gray-light;
+      display: block;
+      margin-left: 60px;
+    }
+  }
+}
+
 /* miccroposts */
 .microposts {
   list-style: none;

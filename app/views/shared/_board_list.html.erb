@@ -1,5 +1,6 @@
-<% if @boards.any? %>
+<% if @board_items.any? %>
   <ol class="boards">
-    <%= render @boards %>
+    <%= render @board_items %>
   </ol>
+  <%= will_paginate @board_items %>
 <% end %>

@@ -3,7 +3,8 @@ class StaticPagesController < ApplicationController
   
   def home
     if logged_in?
-      @boards = current_user.boards
+      @board  = current_user.boards.build
+      @board_items = current_user.boards.paginate(page: params[:page])
     end
   end
 

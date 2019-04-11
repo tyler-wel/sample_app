@@ -1,0 +1,11 @@
+<div class="board-title"><%= @board.name %></div>
+<div class="board-desc"><%= @board.description %></div>
+<div class="board-users">
+  Users: 
+  <% @users.each do |user| %>
+    <%=user.name %>,
+  <% end %>
+</div>
+<div class="task-lists">
+
+</div>
