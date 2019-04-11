@@ -1,15 +1,25 @@
-<div class="board-title"><%= @board.name %></div>
-<div class="board-desc"><%= @board.description %></div>
+<% provide(:title, @board.name) %>
+<h1><%=@board.name%></h1>
+
+<h2><%= @board.description %></h2>
 <div class="board-users">
-  Users: 
+  <b>Owner:</b>
+  <%= User.find(@board.user_id).name %> 
+  <b>Users:</b> 
   <% @users.each do |user| %>
-    <%=user.name %>,
+    <% if @board.user_id != user.id%>
+      <%= user.name %>
+    <%end %>
   <% end %>
 </div>
 
   <% @lists.each do |list| %>
     <div class="task-lists">
-      <div class="list-name"><%= list.name %> </div>
+      <div class="list-name">
+       <%= list.name %>
+       <span class='delete-list'> <%= link_to "Delete", list, method: :delete,
+                                    data: { confirm: "Are you sure?" } %> </span>
+      </div>
       <div class='tasks'>
         <% if list.tasks.any? %>
           <% list.tasks.each do |task|  %>
@@ -20,8 +30,8 @@
         <% else %>
           <h2> No tasks </h2>
         <% end %>
-        <div class='new-task'><%= link_to "New Task", board_path%></div>
+        <div class='new-task'><%= link_to "New Task", new_task_path %></div>
       </div>
     </div>
   <% end %>
-<%= link_to "New Task List", board_path %>
+<%= link_to "New Task List", new_task_list_path(:board_id => @board.id) %>

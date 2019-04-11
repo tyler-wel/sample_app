@@ -15,6 +15,7 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
     @users = @board.users
     @lists = @board.task_lists
+    store_location
   end
   
   def destroy 
