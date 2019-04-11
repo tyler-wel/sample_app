@@ -14,6 +14,7 @@ test_user = User.create(name: "Tester",
 work_board = test_user.boards.create( { name: "Work Board", description: "All tasks related to work" } )
 personal_board = test_user.boards.create( { name: "Person Board", description: "All my personal tasks."})
 
+task_list = work_board.task_lists.create({name:"i'm a list"})
 
 boi_user = User.create(name: "Boi",
   email: "email2@gmail.com",
