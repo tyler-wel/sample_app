@@ -5,32 +5,55 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-test_user = User.create(name: "Tester",
+test_user = User.create!(name: "Tester",
   email: "email@gmail.com",
   password: "foobar",
   password_confirmation: "foobar",
   admin: true)
 
-work_board = test_user.boards.create( { name: "Work Board", description: "All tasks related to work" } )
-personal_board = test_user.boards.create( { name: "Person Board", description: "All my personal tasks."})
 
-task_list = work_board.task_lists.create({name:"i'm a list"})
-
-boi_user = User.create(name: "Boi",
+boi_user = User.create!(name: "Boi",
   email: "email2@gmail.com",
   password: "foobar",
   password_confirmation: "foobar")
+
+
+work_board = test_user.boards.create!( { name: "Work Board", 
+            description: "All tasks related to work", user_id: test_user.id } )
+personal_board = test_user.boards.create!( { name: "Person Board", 
+            description: "All my personal tasks.", user_id: boi_user.id})
+
+front_list = work_board.task_lists.create!({name:"Front-End Tasks"})
+back_list = work_board.task_lists.create!({name:"Back-End Tasks"})
+data_list = work_board.task_lists.create!({name:"Database ToDo"})
+
+
+
+work_board.users << boi_user
+
 
 User.create!(name:  "Example User",
   email: "example@railstutorial.org",
   password:              "foobar",
   password_confirmation: "foobar")
   
-work_board.users << boi_user
+
+3.times do
+  front_name = Faker::Games::Pokemon.name
+  back_name = Faker::Games::Pokemon.name
+  description = Faker::Lorem.sentence(5)
+  front_list.tasks.create!({name: front_name, description: description, user_id: test_user.id})
+  back_list.tasks.create!({name: front_name, description: description, user_id: boi_user.id})
+end
+
+name1 = Faker::Games::Pokemon.name
+name2 = Faker::Games::Pokemon.name
+description = Faker::Lorem.sentence(10)
+data_list.tasks.create!({name: name1, description: description, user_id: test_user.id})
+data_list.tasks.create!({name: name2, description: description, user_id: boi_user.id})
 
 
-
-users = User.order(:created_at).take(6)
+users = User.order(:created_at).take(3)
 10.times do
   content = Faker::Lorem.sentence(5)
   users.each { |user| user.microposts.create(content: content)}

@@ -6,6 +6,22 @@
     <%=user.name %>,
   <% end %>
 </div>
-<div class="task-lists">
 
-</div>
+  <% @lists.each do |list| %>
+    <div class="task-lists">
+      <div class="list-name"><%= list.name %> </div>
+      <div class='tasks'>
+        <% if list.tasks.any? %>
+          <% list.tasks.each do |task|  %>
+            <div class='task'>
+              <%= render task %>
+            </div>
+          <% end %>
+        <% else %>
+          <h2> No tasks </h2>
+        <% end %>
+        <div class='new-task'><%= link_to "New Task", board_path%></div>
+      </div>
+    </div>
+  <% end %>
+<%= link_to "New Task List", board_path %>

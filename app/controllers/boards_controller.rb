@@ -14,7 +14,7 @@ class BoardsController < ApplicationController
   def show
     @board = Board.find(params[:id])
     @users = @board.users
-    #@lists = @board.lists
+    @lists = @board.task_lists
   end
   
 

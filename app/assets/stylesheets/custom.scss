@@ -183,7 +183,7 @@ a:hover{
   text-decoration: none;
 }
 
-/* boards */
+/* board-list */
 .boards {
   list-style: none;
   padding: 0px;
@@ -208,6 +208,36 @@ a:hover{
     }
   }
 }
+
+/* board/show */
+
+.task-lists{
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #e8e8e8;
+  .list-name{
+    font-size: 1.5em;
+    text-decoration: underline;
+  }
+}
+
+.task{
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #e8e8e8;
+
+  .task-finished{
+    display:block;
+    text-align:right;
+  }
+
+
+}
+.new-task{
+  display:block;
+  text-align: right;
+}
+
 
 /* miccroposts */
 .microposts {

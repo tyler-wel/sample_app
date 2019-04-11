@@ -11,5 +11,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :boards, only: [:create, :destroy, :show]
+  resources :task_lists, only: [:new, :create, :destroy]
+  resources :tasks, only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]
 end

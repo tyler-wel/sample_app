@@ -4,6 +4,13 @@
     <span class="description"><%= board.description %></span>
     <span class="timestamp">
       Created at <%= board.created_at %>.
+      <% if board.user_id == current_user.id %>
+        <div class='new-task'><%= link_to "Delete", board %></div>
+      <% else %>
+    
+      <% end %>
     </span>
   </li>
 <% end %>
+
+

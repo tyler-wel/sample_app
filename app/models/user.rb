@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_and_belongs_to_many :boards, -> { distinct }
-
+  has_many :tasks
 
   # Returns the hash digest of the given string.
   def User.digest(string)
